@@ -1,0 +1,30 @@
+{
+  "name": "epm-guuc",
+  "version": "1.0.0",
+  "description": "Tool for frontend contest",
+  "main": "index.js",
+  "repository": "git@github.com:mikhail-hatsilau/epm-guuc.git",
+  "author": "Mikhail_Hatsilau <Mikhail_Hatsilau@epam.com>",
+  "license": "MIT",
+  "scripts": {
+    "server": "nodemon ./server/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "connect-mongo": "^1.3.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.15.0",
+    "mongoose": "^4.7.8",
+    "node-uuid": "^1.4.7",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.3.2"
+  },
+  "devDependencies": {
+    "jest": "^18.1.0",
+    "morgan": "^1.7.0",
+    "nconf": "^0.8.4",
+    "nodemon": "^1.11.0"
+  }
+}
