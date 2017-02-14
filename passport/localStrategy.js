@@ -1,6 +1,6 @@
 const { Strategy } = require('passport-local');
 const { createHash } = require('crypto');
-const { userService } = require('../../services');
+const { userService } = require('../services');
 
 const strategy = new Strategy((username, password, done) => {
     const encryptedPass = createHash('md5').update(password).digest('hex');

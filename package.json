@@ -7,7 +7,13 @@
   "author": "Mikhail_Hatsilau <Mikhail_Hatsilau@epam.com>",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon ./server/server.js"
+    "start": "nodemon server.js",
+    "test": "jest --coverage"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.scss$": "identity-obj-proxy"
+    }
   },
   "dependencies": {
     "body-parser": "^1.16.0",

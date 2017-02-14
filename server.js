@@ -7,11 +7,10 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const nconf = require('../config');
+const nconf = require('./config');
 const passport = require('./passport');
-const mongoose = require('../database');
+const mongoose = require('./database');
 const router = require('./routes');
-const { userService } = require('../services');
 
 const app = express();
 
@@ -35,8 +34,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(`/api/${nconf.get('apiVersion')}`, router);
-
 app.post('/login', (req, res, next) => {
     if (req.isAuthenticated()) {
         res.status(403);
@@ -47,28 +44,28 @@ app.post('/login', (req, res, next) => {
 
     passport.authenticate('local', (err, user, info) => {
         if (err) {
-           return next(err);
+            return next(err);
         }
 
         if (!user) {
-           res.status(403);
-           res.json(info);
-           return;
+            res.status(403);
+            res.json(info);
+            return;
         }
 
         req.logIn(user, (err) => {
-           if (err) {
-               next(err);
-           }
+            if (err) {
+                next(err);
+            }
 
-           res.json({
-               sessionId: req.sessionID
-           });
+            res.json({
+                sessionId: req.sessionID
+            });
         });
     })(req, res, next);
 });
 
-app.use('/register', (req, res, next) => {
+app.post('/register', (req, res, next) => {
     if (req.isAuthenticated()) {
         res.status(403);
         return res.json({
@@ -116,6 +113,8 @@ app.post('/logout', (req, res) => {
         message: 'Logged out'
     });
 });
+
+app.use(`/api/${nconf.get('apiVersion')}`, router);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
